@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>{{ feature.title }} - City Spectra</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    .feature-container {
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 22px;
+      background: #1e1e1e;
+      border-radius: 16px;
+      color: #ddd;
+      text-align: center;
+      box-shadow: 0 6px 46px #bb86fc33;
+    }
+    .feature-img {
+      width: 90px;
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-size: 2.2rem;
+      color: #bb86fc;
+      margin-bottom: 16px;
+    }
+    .feature-content {
+      font-size: 1.12rem;
+      line-height: 1.5;
+      color: #ccc;
+      margin-bottom: 28px;
+    }
+    a.back-link {
+      color: #bb86fc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="spectra">City Spectra</a>
+    <ul class="nav-list">
+      <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('about') }}" class="active">About</a></li>
+      <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="feature-container">
+    <img src="{{ url_for('static', filename=feature.image) }}" alt="{{ feature.title }}" class="feature-img" />
+    <div class="feature-title">{{ feature.title }}</div>
+    <div class="feature-content">{{ feature.content }}</div>
+    <a href="{{ url_for('about') }}" class="back-link">&#8592; Back to About Page</a>
+  </div>
+</body>
+</html>

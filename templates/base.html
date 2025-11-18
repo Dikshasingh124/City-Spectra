@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>City Spectra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+<nav class="navbar">
+    <a href="{{ url_for('home') }}" class="spectra" title="Welcome to City Spectra! Click to explore!">Welcome to City Spectra</a>
+    <ul class="nav-list">
+        <li><a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+        <li><a href="{{ url_for('dashboard') }}" class="{% if request.path == '/dashboard' %}active{% endif %}">Dashboard</a></li>
+        <li><a href="{{ url_for('about') }}" class="{% if request.path == '/about' %}active{% endif %}">About</a></li>
+    </ul>
+</nav>
+
+<div class="flashes">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+{% block content %}{% endblock %}
+</body>
+</html>

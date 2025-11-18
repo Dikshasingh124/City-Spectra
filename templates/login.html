@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>Login - City Spectra</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+<nav class="navbar">
+  <a href="{{ url_for('index') }}" class="spectra">City Spectra</a>
+  <ul class="nav-list">
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+  </ul>
+</nav>
+<div class="container dashboard glass-card" style="max-width:400px;">
+  <h2 style="color:#bb86fc;">Login to City Spectra</h2>
+  <form method="post" action="{{ url_for('login') }}">
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" name="username" required autofocus />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" name="password" required />
+    </div>
+    <button class="submit-btn" type="submit">Log In</button>
+  </form>
+  <p style="color: #eee; padding-top: 18px;">
+    Don't have an account? <a href="{{ url_for('register') }}" style="color:#bb86fc;">Register here</a>.
+  </p>
+</div>
+</body>
+</html>

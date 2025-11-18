@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>About - City Spectra</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    /* About page exclusive styles */
+    .about-hero-img {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 24px auto;
+      display: block;
+      border-radius: 14px;
+      box-shadow: 0 3px 24px #bb86fc22;
+    }
+    .about-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin: 32px 0;
+    }
+    a.about-card {
+      background: #232046;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px #6a80d122;
+      padding: 24px 22px;
+      min-width: 220px;
+      max-width: 280px;
+      flex: 1 1 220px;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      transition: box-shadow 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+    a.about-card:hover {
+      box-shadow: 0 4px 26px #bb86fccc;
+      transform: translateY(-4px);
+      color: #bb86fc;
+      text-decoration: none;
+    }
+    .about-card img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      border-radius: 9px;
+      background: #1e1e1e;
+      box-shadow: 0 2px 16px #bb86fc44;
+    }
+    .about-brand {
+      font-size: 2.5rem;
+      color: #bb86fc;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+      text-shadow: 0 2px 20px #6a80d155;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .about-section {
+      max-width: 760px;
+      margin: 38px auto;
+      padding: 0 10px;
+      text-align: center;
+    }
+    .about-desc {
+      color: #ccc;
+      font-size: 1.15rem;
+      margin-bottom: 22px;
+    }
+    .about-footer {
+      color: #999; font-size: 0.95em; margin-top: 32px;
+      text-align: right;
+    }
+    @media (max-width: 820px) {
+      .about-features { flex-direction: column; align-items: center; }
+      a.about-card { max-width: 480px; width: 80%; }
+      .about-hero-img { max-width: 85vw; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="{{ url_for('index') }}" class="spectra">City Spectra</a>
+  <ul class="nav-list">
+    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+    <li><a href="{{ url_for('about') }}" class="active">About</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+  </ul>
+</nav>
+<div class="header">About City Spectra</div>
+
+<div class="about-section">
+  <!-- Hero visual -->
+  <img src="{{ url_for('static', filename='city_hero.jpg') }}" alt="City analytics illustration" class="about-hero-img" />
+  <div class="about-brand"><a class="action-btn" href="{{ url_for('dashboard') }}">Get Started</a>
+</div>
+  <div class="about-desc">
+    <strong>City Spectra</strong> is a powerful urban analytics and lifestyle comparison platform.<br>
+    Our mission is to make city life transparent, data-driven, and tailored to your needs.<br>
+    Instantly compare safety, commute, affordability, amenities, and much more—across India's top metro areas.
+  </div>
+
+  <div class="about-features">
+    <a href="{{ url_for('about', name='data-analytics') }}" class="about-card" title="Explore Data Analytics">
+      <img src="{{ url_for('static', filename='data_icon.png') }}" alt="Data-driven Insights" />
+      <div><strong>Data Analytics</strong></div>
+      <small>Real urban data, trends, and live metrics for smarter decisions.</small>
+    </a>
+    <a href="{{ url_for('about', name='city-comparison') }}" class="about-card" title="Explore City Comparison">
+      <img src="{{ url_for('static', filename='comparison_icon.png') }}" alt="City Comparison" />
+      <div><strong>Live City Comparison</strong></div>
+      <small>See how cities rank for safety, transport, cost, and lifestyle.</small>
+    </a>
+    <a href="{{ url_for('about', name='personalized-recommendations') }}" class="about-card" title="Explore Personalized Recommendations">
+      <img src="{{ url_for('static', filename='user_icon.png') }}" alt="Personal Recommendations" />
+      <div><strong>Personalized Recommendations</strong></div>
+      <small>Get suggestions based on what matters most to you.</small>
+    </a>
+  </div>
+
+  <div class="about-desc">
+    Built for students, professionals, and families—anyone seeking the perfect home or next adventure.<br>
+    Discover your ideal neighborhood, explore city features, and plan your move with confidence!
+  </div>
+
+  <div class="about-footer">&copy; 2025 City Spectra</div>
+</div>
+</body>
+</html>

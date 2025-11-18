@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>Contact Us - City Spectra</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    body {
+      background: #181622;
+      color: #eee;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .contact-bg {
+      background: linear-gradient(135deg,#201e36 75%, #bb86fc 300%);
+      min-height: 100vh;
+      padding-top: 24px;
+      padding-bottom: 60px;
+    }
+    .contact-card {
+      background: #232046;
+      max-width: 480px;
+      margin: 40px auto 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 34px #bb86fc14;
+      padding: 38px 38px 30px 38px;
+      position: relative;
+      z-index: 2;
+    }
+    .contact-card h2 {
+      color: #bb86fc;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+    }
+    .contact-card p {
+      color: #aaa;
+      margin-bottom: 26px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    form .form-group {
+      margin-bottom: 19px;
+      text-align: left;
+    }
+    form label {
+      font-weight: 600;
+      margin-bottom: 7px;
+      display: block;
+      color: #a492f2;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+    }
+    form input[type="text"], form input[type="email"], form textarea {
+      width: 100%;
+      padding: 13px 16px;
+      font-size: 1.05rem;
+      border-radius: 10px;
+      border: 1.7px solid #bb86fc;
+      background: #221e38;
+      color: #efdfff;
+      margin-top: 4px;
+      margin-bottom: 2px;
+      resize: none;
+      transition: border-color 0.27s;
+      box-sizing: border-box;
+    }
+    form input[type="text"]:focus, form input[type="email"]:focus, form textarea:focus {
+      border-color: #9a63d6;
+      outline: none;
+      background: #26204a;
+    }
+    form textarea {
+      min-height: 90px;
+      max-height: 220px;
+      line-height: 1.5;
+    }
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(to right, #bb86fc 80%, #8d63e6 120%);
+      border: none;
+      color: #26204a;
+      padding: 15px 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 9px;
+      cursor: pointer;
+      box-shadow: 0 5px 18px #bb86fc52;
+      margin-top: 9px;
+      letter-spacing: 0.03em;
+      transition: background 0.23s, color 0.23s;
+    }
+    .submit-btn:hover, .submit-btn:focus {
+      background: #7e4fcf;
+      color: #fff;
+    }
+    @media (max-width:600px){
+      .contact-card {
+        padding: 20px 7vw 22px 7vw;
+      }
+      body { padding: 0; }
+    }
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 15px;
+      position: fixed;
+      z-index: 9999;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="{{ url_for('index') }}" class="spectra">City Spectra</a>
+  <ul class="nav-list">
+    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('contact') }}" class="active">Contact Us</a></li>
+  </ul>
+</nav>
+
+<div class="header" style="text-align:center; color:#bb86fc; margin-top:24px; font-size:2.2rem;">Contact Us</div>
+
+<div class="contact-bg">
+  <div class="contact-card">
+    <h2>We'd love to hear from you!</h2>
+    <p>
+      Have questions, suggestions, or feedback about City Spectra?<br>
+      Use the form below and we will get back to you as soon as possible.
+    </p>
+    <form method="post" action="{{ url_for('contact') }}">
+      <div class="form-group">
+        <label for="name">Name <span style="color:#bb86fc">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Your name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email <span style="color:#bb86fc">*</span></label>
+        <input type="email" id="email" name="email" placeholder="Your email" required />
+      </div>
+      <div class="form-group">
+        <label for="message">Message <span style="color:#bb86fc">*</span></label>
+        <textarea id="message" name="message" placeholder="Write your message here" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.innerText = msg;
+  toast.className = "show";
+  setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+}
+
+window.onload = function() {
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      showToast("{{ message }}");
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+};
+</script>
+
+
+</body>
+</html>

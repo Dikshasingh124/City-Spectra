@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>City Spectra - Welcome</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+<div class="landing-bg">
+  <img src="{{ url_for('static', filename='cityscape.jpg') }}" alt="Cityscape" class="city-bg-img" />
+  <div class="landing-overlay"></div>
+  <div class="landing-content">
+    <div class="brand-glass">
+      <h1 class="main-brand">City Spectra</h1>
+      <div class="landing-tagline">
+        Your gateway to the perfect city life.<br>
+        Discover, compare, and choose communities that fit your dreams!
+      </div>
+      <div class="landing-actions">
+        <a class="action-btn" href="{{ url_for('about') }}">Explore</a>
+        {% if not username %}
+          <a class="action-btn" href="#" onclick="document.getElementById('loginModal').style.display='flex';return false;">Login / Register</a>
+        {% else %}
+          <a class="action-btn" href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login/Register Modal -->
+<div class="modal-bg" id="loginModal" style="display:none;">
+  <div class="modal-card glass-login-card">
+    <span class="close-modal" onclick="document.getElementById('loginModal').style.display='none';">&times;</span>
+    <div class="tab-btns">
+      <button id="loginTabBtn" class="tab-btn active" onclick="showTab('login');return false;">Login</button>
+      <button id="registerTabBtn" class="tab-btn" onclick="showTab('register');return false;">Register</button>
+    </div>
+    <form id="login" method="post" action="{{ url_for('login') }}">
+      <div class="form-group">
+        <label>Username</label>
+        <input required type="text" name="username" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input required type="password" name="password" />
+      </div>
+      <button class="submit-btn" type="submit">Log In</button>
+    </form>
+    <form id="register" method="post" action="{{ url_for('register') }}" style="display:none;">
+      <div class="form-group">
+        <label>Username</label>
+        <input required type="text" name="reg_username" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input required type="password" name="reg_password" />
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input required type="password" name="reg_confirm_password" />
+      </div>
+      <button class="submit-btn" type="submit">Register</button>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+</div>
+
+<script>
+  function showTab(tab) {
+    const loginForm = document.getElementById('login');
+    const regForm = document.getElementById('register');
+    const loginBtn = document.getElementById('loginTabBtn');
+    const regBtn = document.getElementById('registerTabBtn');
+    if(tab === 'login') {
+      loginForm.style.display = 'block';
+      regForm.style.display = 'none';
+      loginBtn.classList.add('active');
+      regBtn.classList.remove('active');
+    } else {
+      loginForm.style.display = 'none';
+      regForm.style.display = 'block';
+      loginBtn.classList.remove('active');
+      regBtn.classList.add('active');
+    }
+  }
+</script>
+</body>
+</html>

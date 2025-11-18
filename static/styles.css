@@ -1,0 +1,715 @@
+body, html {
+  margin: 0;
+   padding: 0;
+   min-height: 100vh;
+   font-family: 'Segoe UI', sans-serif;
+   background-color: #121212;
+   color: #eee;
+}
+
+
+/* ------------ LANDING PAGE ------------ */
+.landing-bg {
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+   position: relative;
+   min-height: 600px;
+}
+.city-bg-img {
+   width: 100vw; height: 100vh;
+   object-fit: cover;
+   position: absolute; left: 0; top: 0; z-index: 0;
+   filter: brightness(0.45) blur(1px);
+}
+.landing-overlay {
+   position: absolute; left: 0; top: 0; width: 100vw; height: 100vh;
+   background: linear-gradient(120deg, #232046bb 0%, #6a6ccf66 70%, #121212ee 100%);
+   z-index: 0;
+}
+.landing-content {
+   width: 100vw; height: 100vh;
+   min-height: 600px;
+   position: absolute; left:0; top:0;
+   display: flex; align-items: center; justify-content: center;
+   z-index: 1;
+}
+.brand-glass {
+   background: rgba(40,34,70,0.80);
+   box-shadow: 0 16px 54px rgba(79,44,139,0.33);
+   border-radius: 24px;
+   padding: 45px 48px 38px 48px;
+   text-align: center;
+   min-width: 320px;
+   max-width: 500px;
+   backdrop-filter: blur(7px);
+}
+.main-brand {
+   font-size: 3rem;
+   color: #bb86fc;
+   font-weight: 800;
+   letter-spacing: 0.14em;
+   margin-bottom: 18px;
+   text-shadow: 0 2px 30px #6a80d1, 0 1px #fff, 0 1.3px #bb86fc;
+}
+.landing-tagline {
+   color: #eee;
+   font-size: 1.2rem;
+   margin-bottom: 27px;
+   font-weight:400;
+}
+.landing-actions {
+   display: flex; flex-direction: row; justify-content: center; gap: 32px;
+   margin-bottom: 10px;
+}
+.action-btn {
+   padding: 12px 36px;
+   font-size: 1.13rem;
+   background: #bb86fc;
+   color: #232046;
+   border: none;
+   outline: none;
+   border-radius: 33px;
+   font-weight: bold;
+   letter-spacing: .09em;
+   cursor:pointer;
+   transition: background 0.2s,color 0.2s,box-shadow 0.2s;
+   box-shadow: 0 1.7px 19px #bb86fc33;
+   text-decoration: none;
+   margin-top: 10px;
+}
+.action-btn:hover {
+   background: #232046;
+   color: #bb86fc;
+   box-shadow:0 4px 17px #bb86fc99;
+}
+
+
+/* ------------ MODAL ------------ */
+.modal-bg {
+   position: fixed; left:0; top:0; width:100vw; height:100vh; z-index: 2000;
+   background: rgba(34,27,49,0.86); display: flex; align-items: center; justify-content: center;
+}
+.modal-card {
+   background: #232046; color: #eee;
+   border-radius: 19px; min-width:320px; max-width:390px; width:96%; box-shadow:0 14px 60px #232046cc;
+   padding: 32px 31px 18px 31px; position:relative;
+}
+.close-modal {
+   position:absolute; right:18px; top:12px; color:#bb86fc; font-size:2rem; font-weight: bold; cursor:pointer;
+   transition: color .2s;
+}
+.close-modal:hover { color:#fff; }
+.tab-btns {
+   display: flex;
+   margin-bottom: 12px;
+   justify-content: center;
+}
+.tab-btn {
+   padding: 5px 21px;
+   background: transparent;
+   color: #bbb;
+   border: none;
+   font-weight: 600;
+   font-size: 1.1rem;
+   cursor: pointer;
+   border-bottom: 3px solid transparent;
+   transition: color 0.2s, border-color 0.2s;
+   margin: 0 4px;
+}
+.tab-btn.active {
+   color: #bb86fc;
+   border-color: #bb86fc;
+}
+.form-group { margin-bottom: 14px; }
+.form-group label { font-weight: 500; color: #c0c0fa;}
+.form-group input {
+   width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #bb86fc;
+   background: #22203a; color: #f6ebff; font-size: 1rem;
+}
+.submit-btn {
+   width: 100%; padding: 12px; font-weight: bold; background-color: #bb86fc; border: none;
+   border-radius: 6px; cursor: pointer; color: #232046; font-size: 1rem; margin-bottom: 12px;
+   margin-top:7px;
+}
+.submit-btn:hover {
+   background-color: #6a80d1; color: #fff;
+}
+.flashes ul { list-style:none; padding:0; margin: 10px auto; max-width: 350px;}
+.flashes li.success { background-color: #4caf50; color: white; padding: 7px 13px; margin-bottom: 7px; border-radius: 6px;}
+.flashes li.error    { background-color: #f44336; color: white; padding: 7px 13px; margin-bottom: 7px; border-radius: 6px;}
+hr { border: none; border-top: 1.8px solid #8d89c1; margin: 22px 0 8px 0;}
+
+
+/* ------------ NAVBAR ------------ */
+.navbar {
+   background-color: #1e1e1e;
+   padding: 12px 24px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   box-shadow: 0 3px 7px rgba(187, 134, 252, 0.3);
+   color: #eee;
+}
+.spectra {
+   font-size: 1.9rem;
+   font-weight: bold;
+   color: #bb86fc;
+   letter-spacing: 0.12em;
+   cursor: default;
+   text-decoration: none;
+}
+.nav-list {
+   list-style-type: none;
+   display: flex;
+   justify-content: center;
+   gap: 30px;
+   margin: 0;
+   padding: 0;
+}
+.nav-list li a {
+   color: #eee;
+   text-decoration: none;
+   font-weight: 600;
+   font-size: 1.05rem;
+   padding: 6px 10px;
+   border-radius: 6px;
+   transition: background-color 0.3s;
+}
+.nav-list li a:hover, .nav-list li a.active {
+   background-color: #bb86fc;
+   color: #121212;
+}
+
+
+/* ------------ DASHBOARD (modular, no affect elsewhere) ------------ */
+.container.dashboard {
+   max-width: 700px;
+   margin: 60px auto;
+   background: #1e1e1e;
+   padding: 32px;
+   border-radius: 14px;
+   box-shadow: 0 4px 42px #bb86fc44;
+   text-align: center;
+   color: #ddd;
+}
+.header {
+   color: #bb86fc;
+   padding: 20px 0;
+   font-size: 2.2rem;
+   text-align: center;
+}
+.dashboard .welcome {
+   font-size: 1.18rem;
+   margin-bottom: 15px;
+}
+/* Add more spacing below the city-select label */
+.dashboard .city-select-label {
+   margin-bottom: 24px;   /* Increase this value for more space */
+   display: block;
+   font-size: 1.15rem;
+   color: #eee;
+}
+
+
+.dashboard .city-dropdown-area {
+   margin-bottom: 28px;
+   display: flex;
+   justify-content: center;
+}
+/* High-contrast dropdown text & options */
+.dashboard .city-dropdown,
+.dashboard .city-dropdown option {
+   color: #f3e9ff !important;
+   background: #232046 !important;
+}
+.dashboard .city-dropdown:focus,
+.dashboard .city-dropdown:hover {
+   border-color: #bb86fc;
+   background: #1e1e2f;
+   color: #fff;
+}
+.dashboard .city-dropdown option:checked,
+.dashboard .city-dropdown option:focus {
+   background-color: #3a2067 !important;
+   color: #fff !important;
+}
+.dashboard #selected-city {
+   margin-top: 20px;
+   font-size: 1.15rem;
+   font-weight: bold;
+   color: #ddd;
+}
+.dashboard-content {
+   margin: 35px 0 0 0;
+   min-height: 80px;
+   font-size: 1.19rem;
+   color: #bb86fc;
+}
+/* Glass morphism/modern card effect */
+.glass-card {
+   background: linear-gradient(135deg,#232046bb 65%, #bb86fc48 100%);
+   box-shadow: 0 8px 42px #bb86fc44, 0 1.5px 38px #6a80d1cc;
+   border-radius: 22px;
+   padding: 38px 38px 36px 38px;
+   margin-top: 38px;
+   animation: fadeInDown 1s;
+}
+
+
+@keyframes fadeInDown {
+   from { opacity: 0; transform: translateY(-30px);}
+   to {opacity:1;transform: translateY(0);}
+}
+
+
+.welcome{
+   font-size: 1.32rem;
+   margin-bottom: 19px;
+   font-weight: 700;
+   color: #ffd8fa;
+   letter-spacing: 0.05em;
+   text-shadow: 0 2px 17px #bb86fc33;
+}
+.welcome-sub{
+   font-size:0.98rem;
+   color:#bb86fcb3;
+   letter-spacing: 0.03em;
+   margin-bottom: 18px;
+   margin-top: 2px;
+}
+/* Attractive glassmorphic login/register modal styling */
+.glass-login-card {
+   background: linear-gradient(135deg, #232046d9 80%, #bb86fc40 100%);
+   box-shadow: 0 12px 40px #bb86fc55, 0 2px 38px #6a80d1aa;
+   border-radius: 18px;
+   padding: 38px 33px 30px 33px;
+   animation: fadeInDown 1s;
+}
+@keyframes fadeInDown {
+   from { opacity: 0; transform: translateY(-20px);}
+   to {opacity:1;transform: translateY(0);}
+}
+.tab-btns {
+   margin-bottom: 19px;
+}
+.tab-btn {
+   transition: background 0.2s, color 0.2s;
+   border-radius: 8px 8px 0 0;
+   margin-right: 6px;
+   font-size: 1.08rem;
+}
+.tab-btn.active {
+   background: #bb86fc22;
+   color: #bb86fc;
+   font-weight: bold;
+}
+.form-group label {
+   color: #bb86fc;
+   font-size: 1.09rem;
+   font-weight: 500;
+}
+.form-group input {
+   background: #221e38;
+   border: 1.7px solid #bb86fc;
+   color: #efdfff;
+   padding: 10px;
+   border-radius: 8px;
+   margin-bottom: 3px;
+}
+/* Feedback and flash message styles */
+.flashes li.success {
+   background-color: #4caf50;
+   color: white;
+   padding: 7px 13px;
+   margin-bottom: 7px;
+   border-radius: 6px;
+}
+.flashes li.error {
+   background-color: #f44336;
+   color: white;
+   padding: 7px 13px;
+   margin-bottom: 7px;
+   border-radius: 6px;
+}
+.submit-btn {
+   background: linear-gradient(to right, #bb86fc 60%, #6a80d1 100%);
+   color: #232046;
+   border: none;
+   padding: 13px 0;
+   border-radius: 9px;
+   font-weight: bold;
+   font-size: 1.09rem;
+   margin-top: 17px;
+   box-shadow: 0 4px 15px #bb86fc42;
+}
+.submit-btn:hover {
+   background: #6a80d1;
+   color: #fff;
+}
+.container.dashboard.glass-card {
+   max-width: 840px;
+   margin: 60px auto 42px auto;
+   padding: 48px 36px 35px 36px;
+}
+
+
+table {
+   margin-top: 32px;
+   background: #15151c;
+   border-radius: 16px;
+   border-collapse: separate;
+   border-spacing: 0 18px;
+   box-shadow: 0 1px 24px #bb86fc22;
+   min-width: 700px;
+}
+
+
+th, td {
+   padding: 18px 18px 11px 18px;
+   text-align: center;
+}
+
+
+thead tr {
+   background: #321d4a;
+   height: 48px;
+   font-size: 1.09rem;
+   border-radius: 16px 16px 0 0;
+}
+
+
+tbody tr {
+   background: #2a233b;
+   border-radius: 13px;
+   box-shadow: 0 2px 14px #bb86fc10 inset;
+}
+
+
+tbody tr:hover {
+   background: #3d2948cc;
+}
+
+
+.progress-bar-container {
+   margin: 7px auto 1px auto;
+   width: 92%;
+   height: 15px;
+   border-radius: 10px;
+}
+
+
+.progress-bar {
+   height: 100%;
+   border-radius: 9px;
+   transition: width 0.5s;
+}
+
+
+.progress-bar.commute { background-color: #7cb9e8; }
+.progress-bar.infra { background-color: #8bc34a; }
+.progress-bar.amenities { background-color: #ffb300; }
+.progress-bar.safety { background-color: #f44336; }
+
+
+.factor-value {
+   display: inline-block;
+   width: 33px;
+   font-weight: bold;
+   margin-bottom: 1px;
+   letter-spacing: 0.02em;
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+   .container.dashboard.glass-card { max-width: 97vw; padding: 12px 1vw; }
+   table { min-width:unset; width: 99vw;}
+   th, td { padding-left: 7px; padding-right: 7px; font-size: 0.92rem;}
+   .progress-bar-container { width: 96%; height: 12px;}
+}
+/* General Responsive container */
+.container {
+   max-width: 960px;
+   padding-left: 15px;
+   padding-right: 15px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+
+/* Flexible layout for navbar */
+nav.navbar {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px 15px;
+}
+
+
+/* Navbar menu items responsive */
+nav.navbar ul.nav-list {
+   display: flex;
+   flex-wrap: wrap;
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+
+
+nav.navbar ul.nav-list li {
+   margin-left: 20px;
+}
+
+
+/* Smaller devices navigation */
+@media (max-width: 768px) {
+   nav.navbar ul.nav-list {
+      width: 100%;
+      justify-content: space-around;
+      margin-top: 10px;
+   }
+   nav.navbar ul.nav-list li {
+      margin-left: 0;
+      margin-bottom: 8px;
+   }
+}
+
+
+/* Forms and input resizing */
+form input[type="text"], form input[type="password"], form input[type="number"], form select {
+   width: 100%;   /* Full width for mobile */
+   max-width: none;
+   box-sizing: border-box;
+}
+
+
+/* Dashboard and analysis page container tweaks */
+.container.dashboard.glass-card {
+   width: 100%;
+   max-width: 860px;
+   margin: 40px auto 60px auto;
+   padding: 40px 20px;
+}
+
+
+/* Table responsive scroll */
+table {
+   display: block;
+   width: 100%;
+   overflow-x: auto;
+   -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+}
+
+
+/* Buttons scaling */
+.submit-btn {
+   width: 100%;
+   font-size: 1.05rem;
+   padding: 12px;
+}
+
+
+/* Smaller screen font adjustment */
+@media (max-width: 480px) {
+   body {
+      font-size: 0.9rem;
+   }
+   h2, h3 {
+      font-size: 1.3rem;
+   }
+   .header {
+      font-size: 1.4rem;
+   }
+   .submit-btn {
+      font-size: 1rem;
+   }
+}
+
+
+/* Adjust navbar logo for smallest screens */
+@media (max-width: 360px) {
+   nav.navbar .spectra {
+      font-size: 1.2rem;
+      letter-spacing: 1.1px;
+   }
+}
+/* ---- City Analysis Page Only ---- */
+body.city-analysis-page {
+  background: #1b1c35;
+  color: #f3effa;
+  min-height: 100vh;
+  padding: 0 0 32px 0;
+}
+.city-analysis-page h1 {
+  color: #ccafff;
+  font-size: 2.1rem;
+  text-align: center;
+  margin-top: 35px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+.city-analysis-page h2 {
+  color: #bb86fc;
+  font-size: 1.3rem;
+  margin-top: 32px;
+  margin-bottom: 14px;
+  font-weight: bold;
+}
+.city-analysis-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 730px;
+  margin: 28px auto 6px auto;
+  background:#232046;
+  border-radius: 12px;
+  padding: 22px 32px;
+  box-shadow: 0 3px 36px #b488fa26;
+}
+.city-analysis-page label {
+  font-weight: 600;
+  color: #ddbfff;
+  font-size: 1.09rem;
+  margin-bottom: 8px;
+}
+.city-analysis-page input[type="number"] {
+  font-size: 1.08rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #8267af;
+  width: 90%;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  background: #150e2e;
+  color: #e7d6ff;
+  outline: none;
+  box-shadow: 0 1.5px 12px #bb86fc1a;
+  transition: border-color 0.2s;
+}
+.city-analysis-page input[type="number"]:focus {
+  border-color: #bb86fc;
+}
+.city-analysis-page button,
+.city-analysis-page .submit-btn {
+  background: linear-gradient(89deg,#bb86fc 50%,#6a80d1 100%);
+  color: #232046;
+  font-weight: 700;
+  font-size: 1.07rem;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 6px;
+  margin-bottom: 9px;
+  letter-spacing: .5px;
+  box-shadow: 0 4px 14px #8971ec55, 0 2.5px 18px #2a2642;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.city-analysis-page button:hover,
+.city-analysis-page .submit-btn:hover {
+  background: #6a80d1;
+  color: #fff;
+}
+.city-analysis-page table {
+  background: #232046;
+  color: #f2e9ff;
+  border-radius: 13px;
+  width: 90%;
+  margin: 24px auto;
+  box-shadow: 0 2px 38px #bb86fc35;
+  font-size: 1.07rem;
+  overflow: auto;
+  border-collapse: collapse;
+}
+.city-analysis-page th, .city-analysis-page td {
+  padding: 14px 20px;
+  border-bottom: 1.2px solid #1f1c37;
+  text-align: center;
+}
+.city-analysis-page th {
+  background: #3c1c65;
+  color: #eedbff;
+  font-size: 1.09rem;
+  font-weight: bold;
+}
+.city-analysis-page tr:last-child td {
+  border-bottom: none;
+}
+.city-analysis-page p {
+  color: #ffaed6;
+  font-size: 1.08rem;
+  font-weight: bold;
+  margin-top: 23px;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .city-analysis-page form,
+  .city-analysis-page table { width:98vw; padding: 11px 4vw;}
+  .city-analysis-page th, .city-analysis-page td { font-size: .98rem; padding: 10px 7px;}
+  .city-analysis-page h1 { font-size: 1.1rem; }
+}
+/* === City Dropdown Custom Styling (Dashboard) === */
+.city-dropdown-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.city-dropdown {
+  background: linear-gradient(120deg, #232046 60%, #bb86fc44 120%);
+  color: #ede7f6;
+  border: none;
+  border-radius: 16px;
+  padding: 13px 36px 13px 20px;
+  font-size: 1.14rem;
+  font-weight: 600;
+  outline: none;
+  box-shadow: 0 2px 16px #bb86fc22;
+  min-width: 240px;
+  transition: box-shadow 0.22s, background 0.22s, color 0.19s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.city-dropdown:focus {
+  box-shadow: 0 6px 26px #b488fa33;
+  background: linear-gradient(120deg, #321d4a 70%, #bb86fc77 120%);
+  color: #fff;
+}
+
+.city-dropdown option {
+  background: #232046;
+  color: #bb86fc;
+  font-weight: 600;
+  border-radius: 10px;
+  font-size: 1.08rem;
+  padding: 10px;
+}
+
+.city-dropdown option[selected],
+.city-dropdown option:checked {
+  background: #3c1c65;
+  color: #fff;
+}
+
+/* Adds a custom arrow icon to the dropdown (no JS needed) */
+.city-dropdown-area {
+  position: relative;
+}
+.city-dropdown-area::after {
+  content: '▼';
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-60%);
+  color: #bb86fc;
+  font-size: 1.08rem;
+  pointer-events: none;
+}
+

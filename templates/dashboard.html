@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>Dashboard - City Spectra</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body class="dashboard">
+<nav class="navbar">
+  <a href="{{ url_for('index') }}" class="spectra">City Spectra</a>
+  <ul class="nav-list">
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+    {% if username %}
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    {% endif %}
+  </ul>
+</nav>
+<div class="header">City Spectra Dashboard</div>
+<div class="container dashboard glass-card">
+  <div class="welcome">
+    👋 Welcome, <strong>{{ username }}</strong>!
+    <div class="welcome-sub">Your personal city lifestyle analyzer</div>
+  </div>
+  <label class="city-select-label">Select a city to see recommendations:</label>
+  <div class="city-dropdown-area">
+    <select id="city-dropdown" class="city-dropdown" onchange="showSelectedCity()">
+      <option value="" disabled selected>Select your city</option>
+      <option value="Pune">Pune</option>
+      <option value="Bangalore">Bangalore</option>
+      <option value="Gurugram">Gurugram</option>
+      <option value="Noida">Noida</option>
+      <option value="Chennai">Chennai</option>
+    </select>
+  </div>
+  <div id="dashboard-content" class="dashboard-content"></div>
+</div>
+<script>
+  function showSelectedCity() {
+    const dropdown = document.getElementById('city-dropdown');
+    const selected = dropdown.options[dropdown.selectedIndex].value;
+    if(selected) {
+      window.location.href = '/city/' + encodeURIComponent(selected);
+    }
+  }
+</script>
+</body>
+</html>

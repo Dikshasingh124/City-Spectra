@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - City Spectra</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    body {
+      background: #111423;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      color: #f1f1fe;
+    }
+    nav.navbar {
+      background: #332178;
+      padding: 16px 24px;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .spectra {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e8e5ff;
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    ul.nav-list {
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    ul.nav-list li {
+      margin-left: 28px;
+    }
+    ul.nav-list a {
+      color: #afaafe;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    ul.nav-list a:hover {
+      color: #c8bcff;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 40px auto 0 auto;
+      background: #181733;
+      padding: 36px 24px 30px 24px;
+      border-radius: 14px;
+      box-shadow: 0 6px 36px #20195f48;
+    }
+
+    h2 {
+      font-size: 2rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      color: #e3e0ff;
+      text-align: center;
+      font-weight: 700;
+    }
+    .metrics {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .metrics span {
+      color: #95fbce;
+      font-size: 1.15rem;
+      font-weight: 600;
+      background: #262359;
+      padding: 10px 22px;
+      border-radius: 9px;
+      box-shadow: 0 3px 14px #23235485;
+    }
+    .users-section {
+      margin-top: 18px;
+    }
+    .users-section h3 {
+      color: #d0c6ff;
+      font-size: 1.08rem;
+      margin-bottom: 18px;
+      font-weight: 600;
+      text-align: left;
+      letter-spacing: 1.2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #232354;
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 1px 9px #44426a1a;
+    }
+    thead tr {
+      background: #5a4acc;
+      font-size: 1.07rem;
+    }
+    th, td {
+      padding: 11px 18px;
+      text-align: center;
+      color: #f4f2ff;
+      font-weight: 600;
+    }
+    tbody tr {
+      background: #232354;
+      transition: background 0.2s;
+    }
+    tbody tr:hover {
+      background: #3b3593;
+    }
+    @media (max-width: 600px){
+      .container { max-width: 97vw; padding: 12px 7px; margin-top: 16px;}
+      h2 { font-size: 1.36rem;}
+      .metrics { flex-direction: column; gap:12px;}
+      .users-section h3 { font-size: .97rem;}
+      th, td { font-size: .88rem; padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="#" class="spectra">Admin Dashboard</a>
+  <ul class="nav-list">
+    <li><a href="{{ url_for('admin_logout') }}">Logout</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <h2>Welcome to the Admin Panel</h2>
+  <div class="metrics">
+    <span>Total Registered Users: {{ users|length }}</span>
+    <span>Total Visitors: {{ visitor_count }}</span>
+  </div>
+  <div class="users-section">
+    <h3>Registered Users</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

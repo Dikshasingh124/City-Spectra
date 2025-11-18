@@ -1,0 +1,76 @@
+city,area,rent,commute,infra,amenities,safety
+Noida,Sector 15,34638,19,3.1,3.1,4.5
+Noida,Sector 18,58748,16,3.6,4.5,4.8
+Noida,Sector 62,47600,41,4.5,3.4,3.7
+Noida,Sector 50,25719,21,3.6,3.1,4.0
+Noida,Sector 44,45975,21,5.0,4.3,3.5
+Noida,Sector 137,30381,49,4.4,3.2,3.2
+Noida,Sector 76,27138,74,4.3,3.5,3.6
+Noida,Sector 128,51896,36,4.4,3.9,4.6
+Noida,Sector 39,59580,69,4.7,3.1,4.4
+Noida,Sector 93A,38966,52,4.8,2.7,4.8
+Noida,Sector 120,32319,44,4.8,4.4,4.0
+Noida,Sector 61,24476,48,4.0,4.4,4.7
+Noida,Sector 21,43043,89,4.9,4.1,3.8
+Noida,Sector 82,51307,43,4.3,2.5,4.0
+Noida,Sector 19,22891,85,4.0,3.8,3.6
+Gurugram,DLF Phase 1,21369,58,4.1,4.2,4.5
+Gurugram,DLF Phase 2,48814,36,3.6,4.3,4.6
+Gurugram,DLF Phase 3,53894,19,3.1,3.1,3.8
+Gurugram,DLF Phase 4,18916,46,4.3,3.5,3.5
+Gurugram,DLF Phase 5,44222,20,4.9,4.4,3.2
+Gurugram,Sohna Road,43784,38,4.9,3.5,4.0
+Gurugram,Sector 56,40100,33,3.6,3.6,4.3
+Gurugram,Sector 52,46714,78,3.0,2.6,4.7
+Gurugram,MG Road,41590,64,4.4,2.9,3.6
+Gurugram,Golf Course Road,35136,58,3.8,3.1,4.6
+Gurugram,Sector 47,30612,45,3.5,4.1,3.5
+Gurugram,Sector 45,36994,24,4.5,3.8,4.6
+Gurugram,Sector 50,39360,58,5.0,4.5,3.6
+Gurugram,Sector 23,32217,66,3.2,4.0,4.0
+Gurugram,Sushant Lok,26575,57,3.8,2.8,3.1
+Chennai,Adyar,46806,74,4.1,3.1,3.5
+Chennai,T Nagar,22135,45,3.7,2.6,5.0
+Chennai,Anna Nagar,41012,65,4.1,4.7,3.9
+Chennai,Velachery,41201,32,4.2,3.8,4.4
+Chennai,Nungambakkam,33116,41,4.5,2.7,5.0
+Chennai,Porur,47347,85,4.0,3.5,4.3
+Chennai,Tambaram,37673,34,3.7,4.0,4.5
+Chennai,Kodambakkam,49575,46,3.0,2.9,3.4
+Chennai,Sholinganallur,51587,36,5.0,3.8,3.9
+Chennai,Guindy,37469,29,4.7,3.4,4.0
+Chennai,Besant Nagar,21517,83,4.5,4.7,3.8
+Chennai,Perungudi,21691,88,4.7,3.9,4.6
+Chennai,Saidapet,52730,49,4.2,3.1,4.3
+Chennai,Ambattur,32498,71,3.2,3.0,4.3
+Chennai,Thoraipakkam,41831,84,3.8,3.3,4.1
+Bangalore,Indiranagar,53569,28,3.9,4.0,4.2
+Bangalore,HSR Layout,23870,24,4.6,4.6,4.7
+Bangalore,JP Nagar,32409,70,4.1,2.6,4.9
+Bangalore,Koramangala,53155,21,4.1,4.0,3.9
+Bangalore,Whitefield,26635,25,4.9,4.9,3.5
+Bangalore,Malleshwaram,53720,95,4.0,3.5,3.1
+Bangalore,Yelahanka,23094,91,4.9,4.4,3.4
+Bangalore,Hebbal,25168,63,4.2,4.4,3.6
+Bangalore,Banashankari,52066,40,3.4,2.9,4.0
+Bangalore,Rajajinagar,46445,15,4.8,3.2,4.3
+Bangalore,Bellandur,18435,33,3.2,4.5,4.4
+Bangalore,Jayanagar,19045,24,3.0,3.1,3.3
+Bangalore,RT Nagar,22087,41,4.0,4.2,4.9
+Bangalore,Marathahalli,27727,15,4.0,4.6,4.5
+Bangalore,BTM Layout,55781,61,4.3,4.7,2.9
+Pune,Koregaon Park,31224,87,5.0,4.5,3.8
+Pune,Viman Nagar,22704,59,3.6,3.3,3.4
+Pune,Baner,32168,58,4.5,3.3,3.5
+Pune,Aundh,20797,88,4.0,2.6,3.4
+Pune,Kothrud,34423,55,3.2,4.1,3.5
+Pune,Wakad,18768,39,4.9,4.7,3.6
+Pune,Hinjewadi,47904,30,4.8,3.7,3.3
+Pune,Magarpatta,41877,76,4.9,4.6,4.3
+Pune,Hadapsar,26464,94,4.5,2.8,3.7
+Pune,Camp,52966,68,4.9,2.9,3.1
+Pune,Pimple Saudagar,24486,15,3.5,2.9,3.0
+Pune,Dhankawadi,39579,32,4.8,3.5,5.0
+Pune,Yerwada,39976,48,3.1,4.6,4.4
+Pune,Deccan Gymkhana,25808,25,4.2,3.7,3.7
+Pune,Swargate,43331,94,4.7,4.2,4.0

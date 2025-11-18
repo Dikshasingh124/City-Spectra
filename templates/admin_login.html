@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <title>Admin Login - City Spectra</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    body {
+      margin: 0; 
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0a0a23; /* Dark blue midnight background */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f5f5f5;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      width: 380px;
+      padding: 42px 32px;
+      box-shadow: 0 10px 40px rgba(114, 82, 255, 0.25);
+      border: 1.7px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(15px);
+      text-align: center;
+      color: #eaeaff;
+    }
+    .glass-card h2 {
+      margin-bottom: 28px;
+      color: #7262ff;
+      letter-spacing: 3px;
+      font-weight: 800;
+      font-size: 2.1rem;
+      text-shadow: 0 0 12px #7262ff88; 
+    }
+    .glass-card label {
+      display: block;
+      text-align: left;
+      margin-bottom: 9px;
+      font-weight: 600;
+      color: #b3afff;
+    }
+    .glass-card input[type="text"],
+    .glass-card input[type="password"] {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      border: none;
+      background: #262450dd;
+      color: #d1cdfd;
+      font-size: 1.02rem;
+      font-weight: 600;
+      outline: none;
+      box-shadow: inset 0 0 14px #7262ff77;
+      transition: box-shadow 0.3s ease;
+    }
+    .glass-card input[type="text"]:focus,
+    .glass-card input[type="password"]:focus {
+      box-shadow: 0 0 28px #7262ffaa;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 16px 0;
+      border-radius: 24px;
+      border: none;
+      background: linear-gradient(45deg, #7262ff, #563ba8);
+      color: #f0e8ff;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1.2rem;
+      letter-spacing: 1.2px;
+      box-shadow: 0 6px 22px #5c3affcc;
+      transition: all 0.3s ease;
+    }
+    .submit-btn:hover {
+      background: linear-gradient(45deg, #563ba8, #7262ff);
+      box-shadow: 0 8px 28px #a290ffdd;
+    }
+    .flashes {
+      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+    }
+    .flashes li {
+      margin-bottom: 12px;
+      border-radius: 14px;
+      padding: 12px 24px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #f2f2f7;
+      text-align: center;
+    }
+    .flashes li.error {
+      background: #e35454cc;
+      box-shadow: 0 0 18px #e35454cc;
+    }
+    .flashes li.success {
+      background: #7ed572cc;
+      box-shadow: 0 0 22px #7ed572cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-card">
+    <h2>Admin Login</h2>
+    <form action="{{ url_for('admin_login') }}" method="post">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" placeholder="Enter admin username" required autofocus />
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" placeholder="Enter password" required />
+      <button class="submit-btn" type="submit">Log In</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+</body>
+</html>
