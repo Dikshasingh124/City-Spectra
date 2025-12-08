@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Admin Dashboard - City Spectra</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   <style>
     body {
       background: #111423;
@@ -33,63 +32,59 @@
       margin: 0;
       padding: 0;
     }
-    ul.nav-list li {
-      margin-left: 28px;
-    }
+    ul.nav-list li { margin-left: 28px; }
     ul.nav-list a {
       color: #afaafe;
       text-decoration: none;
       font-weight: 600;
       font-size: 1.1rem;
     }
-    ul.nav-list a:hover {
-      color: #c8bcff;
-    }
+    ul.nav-list a:hover { color: #c8bcff; }
 
     .container {
-      max-width: 850px;
+      max-width: 900px;
       margin: 40px auto 0 auto;
       background: #181733;
-      padding: 36px 24px 30px 24px;
+      padding: 28px 22px 26px 22px;
       border-radius: 14px;
       box-shadow: 0 6px 36px #20195f48;
     }
 
     h2 {
-      font-size: 2rem;
+      font-size: 1.9rem;
       letter-spacing: 2px;
-      margin-bottom: 10px;
+      margin-bottom: 16px;
       color: #e3e0ff;
       text-align: center;
       font-weight: 700;
     }
-    .metrics {
+
+    /* Tab header */
+    .tab-header {
       display: flex;
       justify-content: center;
-      gap: 40px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 22px;
     }
-    .metrics span {
-      color: #95fbce;
-      font-size: 1.15rem;
-      font-weight: 600;
-      background: #262359;
+    .tab-link {
       padding: 10px 22px;
-      border-radius: 9px;
-      box-shadow: 0 3px 14px #23235485;
-    }
-    .users-section {
-      margin-top: 18px;
-    }
-    .users-section h3 {
-      color: #d0c6ff;
-      font-size: 1.08rem;
-      margin-bottom: 18px;
+      border-radius: 20px;
+      border: 1px solid #5a4acc;
+      color: #c9c3ff;
+      cursor: pointer;
       font-weight: 600;
-      text-align: left;
-      letter-spacing: 1.2px;
+      background: #232354;
+      font-size: 0.98rem;
     }
+    .tab-link.active {
+      background: #5a4acc;
+      color: #ffffff;
+      box-shadow: 0 0 14px #5a4accaa;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -97,30 +92,25 @@
       border-radius: 11px;
       overflow: hidden;
       box-shadow: 0 1px 9px #44426a1a;
+      margin-top: 10px;
     }
-    thead tr {
-      background: #5a4acc;
-      font-size: 1.07rem;
-    }
+    thead tr { background: #5a4acc; font-size: 1.02rem; }
     th, td {
-      padding: 11px 18px;
+      padding: 10px 16px;
       text-align: center;
       color: #f4f2ff;
       font-weight: 600;
+      font-size: 0.96rem;
     }
-    tbody tr {
-      background: #232354;
-      transition: background 0.2s;
-    }
-    tbody tr:hover {
-      background: #3b3593;
-    }
-    @media (max-width: 600px){
-      .container { max-width: 97vw; padding: 12px 7px; margin-top: 16px;}
-      h2 { font-size: 1.36rem;}
-      .metrics { flex-direction: column; gap:12px;}
-      .users-section h3 { font-size: .97rem;}
-      th, td { font-size: .88rem; padding: 8px; }
+    tbody tr { background: #232354; transition: background 0.2s; }
+    tbody tr:nth-child(even){ background:#262861; }
+    tbody tr:hover { background: #3b3593; }
+
+    .empty-msg {
+      margin-top: 16px;
+      text-align: center;
+      color: #b9b3ff;
+      font-size: 0.98rem;
     }
   </style>
 </head>
@@ -134,30 +124,82 @@
 
 <div class="container">
   <h2>Welcome to the Admin Panel</h2>
-  <div class="metrics">
-    <span>Total Registered Users: {{ total_users }}</span>
-<span>Total Visitors: {{ total_visitors }}</span>
 
+  <!-- Tab header -->
+  <div class="tab-header">
+    <button class="tab-link active" onclick="showTab('users-tab')">Registered Users</button>
+    <button class="tab-link" onclick="showTab('messages-tab')">Contact Messages</button>
   </div>
-  <div class="users-section">
-    <h3>Registered Users</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for user in users %}
-        <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.username }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+
+  <!-- Registered Users tab -->
+  <div id="users-tab" class="tab-content active">
+    <h3 style="color:#d0c6ff; font-size:1.05rem; margin-bottom:10px;">
+      Registered Users ({{ users|length }})
+    </h3>
+    {% if users %}
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="empty-msg">No registered users yet.</div>
+    {% endif %}
+  </div>
+
+  <!-- Contact Messages tab -->
+  <div id="messages-tab" class="tab-content">
+    <h3 style="color:#d0c6ff; font-size:1.05rem; margin-bottom:10px;">
+      Contact Messages
+    </h3>
+    {% if contact_messages %}
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for msg in contact_messages %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ msg.name }}</td>
+            <td>{{ msg.email }}</td>
+            <td>{{ msg.message }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="empty-msg">No contact messages yet.</div>
+    {% endif %}
   </div>
 </div>
+
+<script>
+  function showTab(id) {
+    const tabs = document.querySelectorAll('.tab-content');
+    const links = document.querySelectorAll('.tab-link');
+    tabs.forEach(t => t.classList.remove('active'));
+    links.forEach(l => l.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (id === 'users-tab') links[0].classList.add('active');
+    else links[1].classList.add('active');
+  }
+</script>
 </body>
 </html>

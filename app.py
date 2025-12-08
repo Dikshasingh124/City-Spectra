@@ -22,6 +22,8 @@ users = {}
 admins = {
     'spectra_admin': generate_password_hash('City@123')
 }
+#contact(in-memory)
+contact_messages = []   # each item will be a dict: {name, email, message}
 
 # ---------- User auth helpers ----------
 
@@ -50,8 +52,20 @@ def about():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+
+        # save for admin
+        contact_messages.append({
+            'name': name,
+            'email': email,
+            'message': message
+        })
+
         flash("Message sent successfully.", "success")
         return redirect(url_for('contact'))
+
     return render_template("contact.html", username=session.get('username'))
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -203,7 +217,8 @@ def admin_dashboard():
         'admin_dashboard.html',
         users=user_list,
         total_users=total_users,
-        total_visitors=visitor_count
+        total_visitors=visitor_count,
+        contact_messages=contact_messages
     )
 
 
