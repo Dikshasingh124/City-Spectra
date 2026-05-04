@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather</title>
+    <style>
+        body{
+            background-color: #121212;
+            color: #eee;
+        }
+.weather-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background: linear-gradient(135deg, #232046cc, #bb86fc22);
+    border-radius: 20px;
+    box-shadow: 0 8px 40px #bb86fc33;
+    backdrop-filter: blur(6px);
+    text-align: center;
+}
+.weather-title {
+    font-size: 2rem;
+    color: #bb86fc;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+/* Weather Cards Layout */
+.weather-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+/* Individual Card */
+.weather-card {
+    background: #1e1e2f;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px #bb86fc22;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.weather-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px #bb86fc66;
+}
+/* Text Styling */
+.weather-city {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #bb86fc;
+    margin-bottom: 10px;
+}
+.weather-temp {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #ffd8fa;
+}
+.weather-info {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #ccc;
+}
+/* Responsive */
+@media (max-width: 600px) {
+    .weather-container {
+        padding: 15px;
+    }
+}
+    </style>
+</head>
+<body>
+<div class="weather-container">
+    <h1 class="weather-title">Weather Analysis</h1>
+    <div class="weather-cards">
+        {% if weather %}
+        <p><strong>City:</strong> {{ weather.city }}</p>
+  <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+  <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+  <p><strong>Condition:</strong> {{ weather.weather }}</p>
+{% else %}
+  <p>No data available</p>
+{% endif %}
+</div>
+</body>
+</html>

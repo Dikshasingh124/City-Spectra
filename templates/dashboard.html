@@ -6,11 +6,60 @@
 
   <title>Dashboard - City Spectra</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    .weather-btn {
+  position: relative;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #7a5cff, #bb86fc);
+  box-shadow: 0 6px 20px rgba(122, 92, 255, 0.4);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Hover effect */
+.weather-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(187, 134, 252, 0.6);
+}
+
+/* Click effect */
+.weather-btn:active {
+  transform: scale(0.95);
+}
+
+/* Glow animation */
+.weather-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent
+  );
+  transition: all 0.5s;
+}
+
+.weather-btn:hover::before {
+  left: 100%;
+}
+  </style>
 </head>
 <body class="dashboard">
 <nav class="navbar">
   <a href="{{ url_for('index') }}" class="spectra">City Spectra</a>
   <ul class="nav-list">
+    
     <li><a href="{{ url_for('about') }}">About</a></li>
     <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
     {% if username %}
@@ -29,22 +78,37 @@
     <select id="city-dropdown" class="city-dropdown" onchange="showSelectedCity()">
       <option value="" disabled selected>Select your city</option>
       <option value="Pune">Pune</option>
-      <option value="Bangalore">Bangalore</option>
+      <option value="Bengaluru">Bangalore</option>
       <option value="Gurugram">Gurugram</option>
       <option value="Noida">Noida</option>
       <option value="Chennai">Chennai</option>
     </select>
   </div>
+  <div style="margin-top:20px;">
+  <button onclick="goToWeather()" class="weather-btn">
+    <span>🌦️ Weather Analysis</span>
+  </button>
+</div>
   <div id="dashboard-content" class="dashboard-content"></div>
 </div>
 <script>
   function showSelectedCity() {
     const dropdown = document.getElementById('city-dropdown');
-    const selected = dropdown.options[dropdown.selectedIndex].value;
+    const selected = dropdown.value;
     if(selected) {
       window.location.href = '/city/' + encodeURIComponent(selected);
     }
   }
+  function goToWeather() {
+  const dropdown = document.getElementById('city-dropdown');
+  const selected = dropdown.value;
+
+  if (selected) {
+    window.location.href = '/weather/' + encodeURIComponent(selected);
+  } else {
+    alert("Please select a city first");
+  }
+}
 </script>
 </body>
 </html>

@@ -1,7 +1,8 @@
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+import requests #weather api
 
+import plotly.express as px #charts
+import plotly #json encoding
+import json #covert chart data
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
@@ -25,6 +26,35 @@ admins = {
 #contact(in-memory)
 contact_messages = []   # each item will be a dict: {name, email, message}
 
+# weather api 
+API_KEY = "3d6f56d41974112b920daf5c788d51e4"
+
+def get_weather(city):
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    
+    params = {
+        "q": city,
+        "appid": API_KEY,
+        "units": "metric"
+    }
+
+    response = requests.get(url, params=params)
+
+    print(response.url)   
+    print(response.status_code)
+    print(response.text)
+
+    if response.status_code == 200:
+        data = response.json()
+        return {
+            "city": city,
+            "temperature": data["main"]["temp"],
+            "humidity": data["main"]["humidity"],
+            "weather": data["weather"][0]["description"]
+        }
+    else:
+        return None
+
 # ---------- User auth helpers ----------
 
 def login_required(f):
@@ -37,6 +67,7 @@ def login_required(f):
     return decorated_function
 
 # ---------- Basic user routes ----------
+
 
 @app.route('/')
 def index():
@@ -111,6 +142,29 @@ def logout():
 def dashboard():
     return render_template("dashboard.html", username=session.get('username'))
 
+#wether route
+
+cities = ["Pune", "Chennai", "Gurugram", "Noida", "Bengaluru"]
+
+@app.route("/weather")
+def weather_page():
+    weather_results = []
+    
+    for city in cities:
+        data = get_weather(city)
+        if data:
+            weather_results.append(data)
+    
+   # print("DATA:", weather_results)
+    
+    return render_template("weather.html", weather=weather_results)
+
+@app.route("/weather/<city>")
+def weather_city(city):
+    data = get_weather(city)
+
+    return render_template("weather.html", weather=data)
+
 # ---------- Data loading and plots ----------
 
 def load_area_data(city_name, budget):
@@ -119,32 +173,6 @@ def load_area_data(city_name, budget):
     df_filtered = df_city[df_city['rent'] <= budget]
     return df_filtered.to_dict(orient='records')
 
-def plot_rent_bar_chart(recommendations):
-    areas = [row['area'] for row in recommendations]
-    rents = [row['rent'] for row in recommendations]
-    if not areas or not rents:
-        return
-    plt.figure(figsize=(7, max(4, len(areas) * 0.5)))
-    plt.barh(areas, rents, color=['#bb86fc', '#7a48fc', '#a7f7e4'])
-    plt.xlabel('Rent (₹)')
-    plt.ylabel('Area')
-    plt.title('Rent by Area')
-    plt.tight_layout()
-    plt.savefig('static/area_rent_chart.png')
-    plt.close()
-
-def plot_factor_pie_chart(recommendations, factor='infra'):
-    areas = [row['area'] for row in recommendations]
-    values = [row[factor] for row in recommendations]
-    if not areas or not values:
-        return
-    plt.figure(figsize=(5, 5))
-    plt.pie(values, labels=areas, autopct='%1.1f%%', colors=['#bb86fc', '#7a48fc', '#a7f7e4'])
-    plt.title(f'{factor.capitalize()} Distribution')
-    plt.tight_layout()
-    plt.savefig(f'static/{factor}_pie_chart.png')
-    plt.close()
-
 # ---------- City analysis route ----------
 
 @app.route('/city/<city_name>', methods=['GET', 'POST'])
@@ -152,23 +180,60 @@ def plot_factor_pie_chart(recommendations, factor='infra'):
 def city_analysis(city_name):
     budget = None
     recommendations = []
+    barJSON = None
+    pieJSON = None
+
     if request.method == 'POST':
         budget = request.form.get('budget', type=int)
+
         if budget is not None:
             recommendations = load_area_data(city_name, budget)
+
             if recommendations:
-                if not os.path.exists('static'):
-                    os.makedirs('static')
-                plot_rent_bar_chart(recommendations)
-                plot_factor_pie_chart(recommendations, factor='infra')
+                #  Prepare data
+                areas = [row['area'] for row in recommendations]
+                rents = [row['rent'] for row in recommendations]
+                infra = [row['infra'] for row in recommendations]
+
+                #  BAR CHART (Rent)
+                fig_bar = px.bar(
+                    x=rents,
+                    y=areas,
+                    orientation='h',
+                    title="Rent by Area",
+                    color=rents,
+                    color_continuous_scale="purples"
+                )
+                fig_bar.update_layout(
+                template="plotly_dark",
+                height=400,
+                margin=dict(l=20, r=20, t=40, b=20)
+                )
+
+                barJSON = json.dumps(fig_bar, cls=plotly.utils.PlotlyJSONEncoder)
+
+                #  PIE CHART (Infra)
+                fig_pie = px.pie(
+                    values=infra,
+                    names=areas,
+                    title="Infrastructure Distribution"
+                )
+                fig_pie.update_layout(
+                template="plotly_dark",
+                height=400
+                )
+
+                pieJSON = json.dumps(fig_pie, cls=plotly.utils.PlotlyJSONEncoder)
+
     return render_template(
         'city_analysis.html',
         city_name=city_name,
         recommendations=recommendations,
         budget=budget,
-        username=session.get('username')
+        username=session.get('username'),
+        barJSON=barJSON,
+        pieJSON=pieJSON
     )
-
 # ---------- Admin routes ----------
 
 @app.route('/admin/login', methods=['GET', 'POST'])

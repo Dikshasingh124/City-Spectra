@@ -6,8 +6,6 @@ body, html {
    background-color: #121212;
    color: #eee;
 }
-
-
 /* ------------ LANDING PAGE ------------ */
 .landing-bg {
    width: 100vw;
@@ -83,8 +81,6 @@ body, html {
    color: #bb86fc;
    box-shadow:0 4px 17px #bb86fc99;
 }
-
-
 /* ------------ MODAL ------------ */
 .modal-bg {
    position: fixed; left:0; top:0; width:100vw; height:100vh; z-index: 2000;
@@ -139,8 +135,6 @@ body, html {
 .flashes li.success { background-color: #4caf50; color: white; padding: 7px 13px; margin-bottom: 7px; border-radius: 6px;}
 .flashes li.error    { background-color: #f44336; color: white; padding: 7px 13px; margin-bottom: 7px; border-radius: 6px;}
 hr { border: none; border-top: 1.8px solid #8d89c1; margin: 22px 0 8px 0;}
-
-
 /* ------------ NAVBAR ------------ */
 .navbar {
    background-color: #1e1e1e;
@@ -180,8 +174,6 @@ hr { border: none; border-top: 1.8px solid #8d89c1; margin: 22px 0 8px 0;}
    background-color: #bb86fc;
    color: #121212;
 }
-
-
 /* ------------ DASHBOARD (modular, no affect elsewhere) ------------ */
 .container.dashboard {
    max-width: 700px;
@@ -210,8 +202,6 @@ hr { border: none; border-top: 1.8px solid #8d89c1; margin: 22px 0 8px 0;}
    font-size: 1.15rem;
    color: #eee;
 }
-
-
 .dashboard .city-dropdown-area {
    margin-bottom: 28px;
    display: flex;
@@ -255,14 +245,10 @@ hr { border: none; border-top: 1.8px solid #8d89c1; margin: 22px 0 8px 0;}
    margin-top: 38px;
    animation: fadeInDown 1s;
 }
-
-
 @keyframes fadeInDown {
    from { opacity: 0; transform: translateY(-30px);}
    to {opacity:1;transform: translateY(0);}
 }
-
-
 .welcome{
    font-size: 1.32rem;
    margin-bottom: 19px;
@@ -352,8 +338,6 @@ hr { border: none; border-top: 1.8px solid #8d89c1; margin: 22px 0 8px 0;}
    margin: 60px auto 42px auto;
    padding: 48px 36px 35px 36px;
 }
-
-
 table {
    margin-top: 32px;
    background: #15151c;
@@ -363,55 +347,39 @@ table {
    box-shadow: 0 1px 24px #bb86fc22;
    min-width: 700px;
 }
-
-
 th, td {
    padding: 18px 18px 11px 18px;
    text-align: center;
 }
-
-
 thead tr {
    background: #321d4a;
    height: 48px;
    font-size: 1.09rem;
    border-radius: 16px 16px 0 0;
 }
-
-
 tbody tr {
    background: #2a233b;
    border-radius: 13px;
    box-shadow: 0 2px 14px #bb86fc10 inset;
 }
-
-
 tbody tr:hover {
    background: #3d2948cc;
 }
-
-
 .progress-bar-container {
    margin: 7px auto 1px auto;
    width: 92%;
    height: 15px;
    border-radius: 10px;
 }
-
-
 .progress-bar {
    height: 100%;
    border-radius: 9px;
    transition: width 0.5s;
 }
-
-
 .progress-bar.commute { background-color: #7cb9e8; }
 .progress-bar.infra { background-color: #8bc34a; }
 .progress-bar.amenities { background-color: #ffb300; }
 .progress-bar.safety { background-color: #f44336; }
-
-
 .factor-value {
    display: inline-block;
    width: 33px;
@@ -419,8 +387,6 @@ tbody tr:hover {
    margin-bottom: 1px;
    letter-spacing: 0.02em;
 }
-
-
 /* Responsive tweaks */
 @media (max-width: 700px) {
    .container.dashboard.glass-card { max-width: 97vw; padding: 12px 1vw; }
@@ -436,8 +402,6 @@ tbody tr:hover {
    margin-left: auto;
    margin-right: auto;
 }
-
-
 /* Flexible layout for navbar */
 nav.navbar {
    display: flex;
@@ -446,8 +410,6 @@ nav.navbar {
    align-items: center;
    padding: 10px 15px;
 }
-
-
 /* Navbar menu items responsive */
 nav.navbar ul.nav-list {
    display: flex;
@@ -456,13 +418,9 @@ nav.navbar ul.nav-list {
    padding: 0;
    margin: 0;
 }
-
-
 nav.navbar ul.nav-list li {
    margin-left: 20px;
 }
-
-
 /* Smaller devices navigation */
 @media (max-width: 768px) {
    nav.navbar ul.nav-list {
@@ -475,16 +433,12 @@ nav.navbar ul.nav-list li {
       margin-bottom: 8px;
    }
 }
-
-
 /* Forms and input resizing */
 form input[type="text"], form input[type="password"], form input[type="number"], form select {
    width: 100%;   /* Full width for mobile */
    max-width: none;
    box-sizing: border-box;
 }
-
-
 /* Dashboard and analysis page container tweaks */
 .container.dashboard.glass-card {
    width: 100%;
@@ -492,8 +446,6 @@ form input[type="text"], form input[type="password"], form input[type="number"],
    margin: 40px auto 60px auto;
    padding: 40px 20px;
 }
-
-
 /* Table responsive scroll */
 table {
    display: block;
@@ -501,16 +453,12 @@ table {
    overflow-x: auto;
    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
 }
-
-
 /* Buttons scaling */
 .submit-btn {
    width: 100%;
    font-size: 1.05rem;
    padding: 12px;
 }
-
-
 /* Smaller screen font adjustment */
 @media (max-width: 480px) {
    body {
@@ -526,8 +474,6 @@ table {
       font-size: 1rem;
    }
 }
-
-
 /* Adjust navbar logo for smallest screens */
 @media (max-width: 360px) {
    nav.navbar .spectra {
@@ -676,13 +622,11 @@ body.city-analysis-page {
   cursor: pointer;
   position: relative;
 }
-
 .city-dropdown:focus {
   box-shadow: 0 6px 26px #b488fa33;
   background: linear-gradient(120deg, #321d4a 70%, #bb86fc77 120%);
   color: #fff;
 }
-
 .city-dropdown option {
   background: #232046;
   color: #bb86fc;
@@ -691,13 +635,11 @@ body.city-analysis-page {
   font-size: 1.08rem;
   padding: 10px;
 }
-
 .city-dropdown option[selected],
 .city-dropdown option:checked {
   background: #3c1c65;
   color: #fff;
 }
-
 /* Adds a custom arrow icon to the dropdown (no JS needed) */
 .city-dropdown-area {
   position: relative;

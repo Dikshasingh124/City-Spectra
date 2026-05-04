@@ -13,7 +13,7 @@ body.analysis-page {
 }
 
 .analysis-container {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 46px auto 0 auto;
   background: rgba(40,34,70,0.83);
   border-radius: 19px;
@@ -125,19 +125,18 @@ tr:last-child td { border-bottom: none; }
 .visuals-area {
   display: flex;
   flex-wrap: wrap;
-  gap: 33px;
-  justify-content: center;
-  margin-bottom: 22px;
+  gap: 30px;
+  justify-content: space-between;
+  
 }
 
-.visuals-area img {
-  background: #232046;
-  box-shadow: 0 3px 18px #bb86fc54;
-  border-radius: 16px;
-  padding: 12px;
-  margin-top: 12px;
-  max-width: 420px;
-  max-height: 290px;
+.visuals-area div {
+ flex: 1;
+ min-width: 400px;
+}
+#barchart,#piechart{
+  width: 100%;
+  height: 400px;
 }
 
 /* Message for no results */
@@ -195,22 +194,41 @@ p {
         {% endfor %}
       </tbody>
     </table>
-    <div class="visuals-area">
+   <div class="visuals-area">
+
+  <!-- BAR CHART -->
   <div>
-    <img src="{{ url_for('static', filename='area_rent_chart.png') }}">
+    <div id="barChart"></div>
     <div style="text-align:center; color:#bb86fc; margin-top:6px;">
-      <strong>Rent by Area</strong><br>
-      <small>Each bar shows the monthly rent for the area. Larger bars mean higher rent.</small>
+      <strong>Rent by Area</strong>
     </div>
   </div>
+
+  <!-- PIE CHART -->
   <div>
-    <img src="{{ url_for('static', filename='infra_pie_chart.png') }}">
+    <div id="pieChart"></div>
     <div style="text-align:center; color:#bb86fc; margin-top:6px;">
-      <strong>Infrastructure Score Distribution</strong><br>
-      <small>Each slice shows the area's portion of total infrastructure rating.</small>
+      <strong>Infrastructure Distribution</strong>
     </div>
   </div>
+
 </div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+{% if barJSON %}
+<script>
+    var barGraph = {{ barJSON | safe }};
+    Plotly.newPlot('barChart', barGraph.data, barGraph.layout);
+</script>
+{% endif %}
+
+{% if pieJSON %}
+<script>
+    var pieGraph = {{ pieJSON | safe }};
+    Plotly.newPlot('pieChart', pieGraph.data, pieGraph.layout);
+</script>
+{% endif %}
 
   {% else %}
     <p>No suitable areas found for this budget.</p>
